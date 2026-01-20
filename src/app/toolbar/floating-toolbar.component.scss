@@ -1,0 +1,190 @@
+$bg: #ffffff;
+$border: #e2e8f0;
+$text: #475569;
+$text-active: #1e293b;
+$primary-btn: #1e3a8a; // Dark blue
+$hover: #f1f5f9;
+
+.floating-toolbar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background: $bg;
+    border-radius: 12px;
+    padding: 6px 10px;
+    gap: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid $border;
+    transform: translateY(-100%);
+    margin-top: -10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, top 0.2s ease, left 0.1s ease;
+    z-index: 1000;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .group {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    /* Dividers */
+    .divider {
+        width: 1px;
+        height: 24px;
+        background: #cbd5e1;
+        margin: 0 4px;
+    }
+
+    /* Button Generics */
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        transition: all 0.2s;
+
+        svg {
+            fill: currentColor;
+        }
+    }
+
+    /* Specific Button Styles */
+    .btn-dark {
+        background: $primary-btn;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        &:hover {
+            background: color-mix(in srgb, $primary-btn, white 20%);
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        color: $text;
+        border-radius: 6px;
+        font-size: 14px;
+
+        &:hover {
+            background: $hover;
+            color: $text-active;
+        }
+
+        &.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .btn-round {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: $hover;
+        color: $text;
+
+        &:hover {
+            background: #cbd5e1;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .btn-round-large {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: $text;
+
+        &:hover {
+            background: #e2e8f0;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    /* Color Picker Wrapper */
+    .color-wrapper {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        overflow: hidden;
+
+        input[type="color"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+    }
+
+    /* Font Size Group */
+    .font-size-group {
+        background: white;
+        border: 1px solid $border;
+        border-radius: 6px;
+        padding: 2px;
+        gap: 4px;
+        display: flex;
+        align-items: center;
+
+        /* Styling the input wrapper */
+        .size-input-wrapper {
+            width: 40px;
+            display: flex;
+            justify-content: center;
+
+            input {
+                width: 100%;
+                border: none;
+                text-align: center;
+                font-size: 13px;
+                font-weight: 500;
+                color: $text-active;
+                background: transparent;
+                outline: none;
+                padding: 2px 0;
+
+                /* Remove spinners */
+                -moz-appearance: textfield;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

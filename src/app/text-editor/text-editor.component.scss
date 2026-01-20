@@ -1,0 +1,241 @@
+$bg: #ffffff;
+$border: #e2e8f0;
+$text: #475569;
+$text-active: #1e293b;
+$primary-btn: #1e3a8a; // Dark blue
+$hover: #f1f5f9;
+
+:host {
+  display: block;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  border: 1px solid $border;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  background: white;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:focus-within {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #3b82f6;
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: $bg;
+  border-bottom: 1px solid $border;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  /* Dividers */
+  .divider {
+    width: 1px;
+    height: 24px;
+    background: #cbd5e1;
+    margin: 0 4px;
+  }
+
+  /* Button Generics */
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.2s;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  /* Specific Button Styles */
+  .btn-dark {
+    background: $primary-btn;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+
+    &:hover {
+      background: color-mix(in srgb, $primary-btn, white 20%);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    color: $text;
+    border-radius: 6px;
+    font-size: 14px;
+
+    &:hover {
+      background: $hover;
+      color: $text-active;
+    }
+
+    &.active {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .btn-round {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: $hover;
+    color: $text;
+
+    &:hover {
+      background: #cbd5e1;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .btn-round-large {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: $text;
+
+    &:hover {
+      background: #e2e8f0;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Color Picker Wrapper */
+  .color-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+
+    input[type="color"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  /* Font Size Group */
+  .font-size-group {
+    background: white;
+    border: 1px solid $border;
+    border-radius: 6px;
+    padding: 2px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+
+    /* Styling the input wrapper for standalone editor too */
+    .size-input-wrapper {
+      width: 40px;
+      display: flex;
+      justify-content: center;
+
+      input {
+        width: 100%;
+        border: none;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        color: $text-active;
+        background: transparent;
+        outline: none;
+        padding: 2px 0;
+        /* Remove spinners */
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.editor-content {
+  min-height: 200px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 1.5rem;
+  color: $text-active;
+  font-size: 1rem;
+  line-height: 1.6;
+  outline: none;
+
+  &:empty:before {
+    content: attr(placeholder);
+    color: #94a3b8;
+    pointer-events: none;
+  }
+
+  ::ng-deep {
+    p {
+      margin-bottom: 0.75em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.5em;
+      margin-bottom: 0.75em;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+
+    blockquote {
+      border-left: 4px solid $border;
+      padding-left: 1rem;
+      margin-left: 0;
+      color: $text;
+    }
+  }
+}

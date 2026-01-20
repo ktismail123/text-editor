@@ -1,0 +1,105 @@
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f1f5f9;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.content {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-top: -1.5rem;
+}
+
+section {
+    h2 {
+        font-size: 1.5rem;
+        color: #334155;
+        margin-bottom: 0.5rem;
+    }
+
+    .desc {
+        color: #64748b;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.editor-wrapper {
+    background: transparent;
+}
+
+/* Form Styles for Option 2 */
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-like {
+        background: white;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 0.75rem;
+        min-height: 48px; // Looks like input
+        transition: all 0.2s;
+
+        &:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        &.body-input {
+            min-height: 120px; // Looks like textarea
+        }
+    }
+}
+
+
+.preview-wrapper {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #cbd5e1;
+
+    h3 {
+        font-size: 1.125rem;
+        color: #334155;
+        margin-bottom: 0.5rem;
+    }
+
+    .preview-box {
+        background: #1e293b;
+        color: #cbd5e1;
+        padding: 1rem;
+        border-radius: 8px;
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-break: break-all;
+
+        strong {
+            color: #fff;
+        }
+    }
+}

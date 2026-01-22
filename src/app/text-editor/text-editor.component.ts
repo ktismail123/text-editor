@@ -72,10 +72,58 @@ export class TextEditorComponent implements ControlValueAccessor, AfterViewInit,
   // --- event Handlers ---
   onInput(): void {
     const html = this.editorRef.nativeElement.innerHTML;
-    this.content = html;
-    this.onChange(html);
+    // Clean up empty lines if needed before emitting
+    this.content = this.cleanupEmptyLines(html);
+    this.onChange(this.content);
     this.saveSelection();
     this.updateToolbarState();
+  }
+
+  cleanupEmptyLines(html: string): string {
+    // 1. Create a temp div to parse HTML
+    const div = document.createElement('div');
+    div.innerHTML = html;
+
+    // 2. Remove empty block elements (p, div) that just contain <br>, whitespace or nothing
+    // We iterate in reverse to handle nesting safely if needed, though simpler is likely fine via QuerySelector
+    const blocks = div.querySelectorAll('p, div');
+    blocks.forEach(block => {
+        const text = block.textContent || '';
+        // If it strictly contains only whitespace/br/empty
+        if (!text.trim() && block.innerHTML.trim().replace(/<br\s*\/?>/gi, '') === '') {
+            block.remove();
+        }
+    });
+
+    // 3. Remove standalone <br> tags at the root level if they are just creating noise?
+    // User requested "remove all empty lines". Usually this means empty paragraphs or just <br>s.
+    // If we just want to TRIM leading/trailing empty lines, that's one thing. 
+    // If we want to remove ALL empty lines between paragraphs:
+    
+    // Let's implement a 'compact' cleanup:
+    // Remove all <br> that are not significant?
+    // Or just simple regex for simpler inputs:
+    
+    let cleanHtml = div.innerHTML;
+    // Regex strategy for simple recurring empty lines:
+    // Replace multiple <br> with single or remove empty p?
+    
+    // Re-read user request: "click that submit button, these dat i need to remove all empty lines"
+    // Usually means trimming start/end and collapsing multiple newlines.
+    
+    // Simple heuristic: 
+    // 1. Replace <p><br></p> or <div><br></div> with empty
+    cleanHtml = cleanHtml.replace(/<(p|div)>\s*<br\s*\/?>\s*<\/\1>/gi, '');
+    // 2. Remove standalone <br>
+    // cleanHtml = cleanHtml.replace(/<br\s*\/?>/gi, ''); // Too aggressive? contenteditable uses <br> for newlines.
+    
+    // User Update: "Remove all empty lines". 
+    // If the editor creates <div><br></div> for a new line, removing that collapses the text. 
+    // I will assume they want to remove TRAILING/LEADING whitespace or "blank" blocks primarily.
+    
+    // Let's stick to the DOM removal of empty blocks we did above (step 2), and then just trim.
+    
+    return div.innerHTML.trim(); 
   }
 
   onBlur(): void {
